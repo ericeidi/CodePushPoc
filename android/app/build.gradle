@@ -121,11 +121,18 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            resValue "string", "CodePushDeploymentKey", '""'
         }
+        releaseStaging {
+            resValue "string", "CodePushDeploymentKey", '"k2auQEIsuQgl_TyfurFpX-pX1K8zddF8DAbE6"'
+            matchingFallbacks = ['release']
+        }
+
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
+            resValue "string", "CodePushDeploymentKey", '"Z7nVVdBOgRRgzlYEiaHK1pe-O4emNBbVBdfsd"'
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -168,3 +175,4 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
